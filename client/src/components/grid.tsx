@@ -13,9 +13,9 @@ const Grid: React.FC<IProps> = (props) => {
     gap: props.gap ? `{gap}px` : '0'
   }
 
-  const col = props.col ? `grid-col-${props.col}'` : '';
-  const mdCol = props.mdCol ? `grid-col-${props.mdCol}'` : '';
-  const smCol = props.smCol ? `grid-col-${props.smCol}'` : '';
+  const col = props.col ? `grid-col-${props.col}` : '';
+  const mdCol = props.mdCol ? `grid-col-${props.mdCol}` : '';
+  const smCol = props.smCol ? `grid-col-${props.smCol}` : '';
 
   return (
     <div className={`grid ${col} ${mdCol} ${smCol}`} style={style}>
