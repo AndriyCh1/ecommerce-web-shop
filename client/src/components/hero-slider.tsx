@@ -1,5 +1,6 @@
 import React, { useCallback, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
+import Button from './button';
 
 interface IHeroItem {
   title: string;
@@ -81,7 +82,9 @@ const HeroSliderItem: React.FC<IHeroItemProps> = ({ item, isActive }) => (
       </div>
       <div className="hero-slider__item__info__btn">
         <Link to={item.path}>
-          <button>xem chi tiet</button>
+          <Button backgroundColor={item.color} icon="bx bx-cart" animate={true}>
+            xem chi tiet
+          </Button>
         </Link>
       </div>
     </div>
