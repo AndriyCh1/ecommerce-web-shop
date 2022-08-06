@@ -1,41 +1,53 @@
-const product_01_image_01 = require('../images/products/product-01 (1).jpg').default
-const product_01_image_02 = require('../images/products/product-01 (2).jpg').default
+import product_01_image_01 from '../images/products/product-01 (1).jpg';
+import product_01_image_02 from '../images/products/product-01 (2).jpg';
 // const product_01_image_03 = require('../images/products/product-01 (3).jpg').default
 
-const product_02_image_01 = require('../images/products/product-02 (1).jpg').default
-const product_02_image_02 = require('../images/products/product-02 (2).jpg').default
+import product_02_image_01 from '../images/products/product-02 (1).jpg';
+import product_02_image_02 from '../images/products/product-02 (2).jpg';
 
-const product_03_image_01 = require('../images/products/product-03 (1).jpg').default
-const product_03_image_02 = require('../images/products/product-03 (2).jpg').default
+import product_03_image_01 from '../images/products/product-03 (1).jpg';
+import product_03_image_02 from '../images/products/product-03 (2).jpg';
 
-const product_04_image_01 = require('../images/products/product-04 (1).jpg').default
-const product_04_image_02 = require('../images/products/product-04 (2).jpg').default
+import product_04_image_01 from '../images/products/product-04 (1).jpg';
+import product_04_image_02 from '../images/products/product-04 (2).jpg';
 
-const product_05_image_01 = require('../images/products/product-05 (1).jpg').default
-const product_05_image_02 = require('../images/products/product-05 (2).jpg').default
+import product_05_image_01 from '../images/products/product-05 (1).jpg';
+import product_05_image_02 from '../images/products/product-05 (2).jpg';
 
-const product_06_image_01 = require('../images/products/product-06 (1).jpg').default
-const product_06_image_02 = require('../images/products/product-06 (2).jpg').default
+import product_06_image_01 from '../images/products/product-06 (1).jpg';
+import product_06_image_02 from '../images/products/product-06 (2).jpg';
 
-const product_07_image_01 = require('../images/products/product-07 (1).jpg').default
-const product_07_image_02 = require('../images/products/product-07 (2).jpg').default
+import product_07_image_01 from '../images/products/product-07 (1).jpg';
+import product_07_image_02 from '../images/products/product-07 (2).jpg';
 
-const product_08_image_01 = require('../images/products/product-08 (1).jpg').default
-const product_08_image_02 = require('../images/products/product-08 (2).jpg').default
+import product_08_image_01 from '../images/products/product-08 (1).jpg';
+import product_08_image_02 from '../images/products/product-08 (2).jpg';
 
-const product_09_image_01 = require('../images/products/product-09 (1).jpg').default
-const product_09_image_02 = require('../images/products/product-09 (2).jpg').default
+import product_09_image_01 from '../images/products/product-09 (1).jpg';
+import product_09_image_02 from '../images/products/product-09 (2).jpg';
 
-const product_10_image_01 = require('../images/products/product-10 (1).jpg').default
-const product_10_image_02 = require('../images/products/product-10 (2).jpg').default
+import product_10_image_01 from '../images/products/product-10 (1).jpg';
+import product_10_image_02 from '../images/products/product-10 (2).jpg';
 
-const product_11_image_01 = require('../images/products/product-11 (1).jpg').default
-const product_11_image_02 = require('../images/products/product-11 (2).jpg').default
+import product_11_image_01 from '../images/products/product-11 (1).jpg';
+import product_11_image_02 from '../images/products/product-11 (2).jpg';
 
-const product_12_image_01 = require('../images/products/product-12 (1).jpg').default
-const product_12_image_02 = require('../images/products/product-12 (2).jpg').default
+import product_12_image_01 from '../images/products/product-12 (1).jpg';
+import product_12_image_02 from '../images/products/product-12 (2).jpg';
 
-const products = [
+interface IProduct {
+    title: string;
+    price: string;
+    image01: any;
+    image02: any;
+    categorySlug: string;
+    colors: string[];
+    slug: string;
+    size: string[];
+    description: string;
+}
+
+const products: IProduct[] = [
     {
         title: "Áo thun Dinosaur 01",
         price: '189000',
@@ -237,19 +249,19 @@ const products = [
     // 18 products
 ]
 
-const getAllProducts = () => products
+const getAllProducts = () => products;
 
-const getProducts = (count) => {
+const getProducts = (count: number) => {
     const max = products.length - count
     const min = 0
     const start = Math.floor(Math.random() * (max - min) + min)
     return products.slice(start, start + count)
 }
 
-const getProductBySlug = (slug) => products.find(e => e.slug === slug)
+const getProductBySlug = (slug: any) => products.find(e => e.slug === slug)
 
-const getCartItemsInfo = (cartItems) => {
-    let res = []
+const getCartItemsInfo = (cartItems: IProduct[]) => {
+    const res: any[] = [];
     if (cartItems.length > 0) {
         cartItems.forEach(e => {
             let product = getProductBySlug(e.slug)
