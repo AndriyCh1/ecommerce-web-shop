@@ -1,9 +1,8 @@
-import React, { useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import Helmet from '../components/helmet';
-import Grid from '../components/grid';
-import ProductCard from '../components/product-card';
 import CheckBox from '../components/check-box';
 import Button from '../components/button';
+import InfinityList from '../components/infinity-list';
 
 import productData from '../assets/fake-data/products';
 import category from '../assets/fake-data/category';
@@ -65,40 +64,49 @@ const Catalog = () => {
 
   const clearFilter = () => setFilter(initFilter);
 
-  const updateProducts = useCallback(
-    () => {
-      let temp = productList;
+  const updateProducts = useCallback(() => {
+    let temp = productList;
 
-      if (filter.category.length > 0) {
-        temp = temp.filter(e => filter.category.includes(e.categorySlug));
-      }
+    if (filter.category.length > 0) {
+      temp = temp.filter((e) => filter.category.includes(e.categorySlug));
+    }
 
-      if (filter.color.length > 0) {
-        temp = temp.filter(e => {
-          const check = e.colors.find(color => filter.color.includes(color));
-          return check !== undefined;
-        });
-      }
+    if (filter.color.length > 0) {
+      temp = temp.filter((e) => {
+        const check = e.colors.find((color) => filter.color.includes(color));
+        return check !== undefined;
+      });
+    }
 
-      if (filter.size.length > 0) {
-        temp = temp.filter(e => {
-          const check = e.size.find(color => filter.size.includes(color));
-          return check !== undefined;
-        });
-      }
+    if (filter.size.length > 0) {
+      temp = temp.filter((e) => {
+        const check = e.size.find((color) => filter.size.includes(color));
+        return check !== undefined;
+      });
+    }
 
-      setProducts(temp);
-    }, [filter, setProducts]
-  )
+    setProducts(temp);
+  }, [filter, setProducts]);
 
   useEffect(() => {
-    updateProducts()
-  }, [updateProducts])
+    updateProducts();
+  }, [updateProducts]);
+
+  const filterRef = useRef<HTMLDivElement>(null);
+
+  const toggleFilter = () => {
+    if (filterRef && filterRef.current) {
+      filterRef.current.classList.toggle('active');
+    }
+  }
 
   return (
     <Helmet title="Catalog">
       <div className="catalog">
-        <div className="catalog__filter">
+        <div className="catalog__filter" ref={filterRef}>
+          <div className='catalog__filter__close' onClick={toggleFilter}>
+            <i className='bx bx-left-arrow-alt'></i>
+          </div>
           <div className="catalog__filter__widget">
             <div className="catalog__filter__widget__title">danh muc san pham</div>
             <div className="catalog__filter__widget__content">
@@ -143,23 +151,17 @@ const Catalog = () => {
           </div>
           <div className="catalog__filter__widget__title">
             <div className="catalog__filter__widget__content">
-              <Button size="sm" onClick={clearFilter}>xoa bo loc</Button>
+              <Button size="sm" onClick={clearFilter}>
+                xoa bo loc
+              </Button>
             </div>
           </div>
         </div>
+        <div className='catalog__filter__toggle'>
+          <Button size='sm' onClick={toggleFilter}>vo  loc</Button>
+        </div>
         <div className="catalog__content">
-          <Grid col={3} mdCol={2} smCol={1} gap={20}>
-            {products.map((item, index) => (
-              <ProductCard
-                key={index}
-                img01={item.image01}
-                img02={item.image02}
-                name={item.title}
-                price={Number(item.price)}
-                slug={item.slug}
-              />
-            ))}
-          </Grid>
+          <InfinityList data={products} />
         </div>
       </div>
     </Helmet>
