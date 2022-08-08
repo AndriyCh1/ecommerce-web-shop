@@ -26,7 +26,7 @@ const ProductView: React.FC<IProps> = ({ product }) => {
   const [size, setSize] = useState('');
   const [quantity, setQuantity] = useState(1);
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const updateQuantity = (type: string) => {
     if (type === 'plus') {
@@ -65,10 +65,10 @@ const ProductView: React.FC<IProps> = ({ product }) => {
   };
 
   const goToCart = () => {
-    if(check()) {
-      navigate('/cart')
+    if (check()) {
+      navigate('/cart');
     }
-  }
+  };
 
   return (
     <div className="product">
@@ -156,6 +156,15 @@ const ProductView: React.FC<IProps> = ({ product }) => {
         <div className="product__info__item">
           <Button onClick={() => addToCart()}>them vao gio</Button>
           <Button onClick={() => goToCart()}>mu ngay</Button>
+        </div>
+      </div>
+      <div className={`product-description mobile ${descriptionExpand ? 'expand' : ''}`}>
+        <div className="product-description__title">Chi tief san pham</div>
+        <div className="product-description__content">{product.description}</div>
+        <div className="product-description__toggle">
+          <Button size="sm" onClick={() => setDescriptionExpand(!descriptionExpand)}>
+            {descriptionExpand ? 'Thu gon' : 'Xem them'}
+          </Button>
         </div>
       </div>
     </div>
