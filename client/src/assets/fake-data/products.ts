@@ -258,7 +258,7 @@ const getProducts = (count: number) => {
     return products.slice(start, start + count)
 }
 
-const getProductBySlug = (slug: any) => products.find(e => e.slug === slug)
+const getProductBySlug = (slug: string) => products.find(e => e.slug === slug)
 
 const getCartItemsInfo = (cartItems: IProduct[]) => {
     const res: any[] = [];
