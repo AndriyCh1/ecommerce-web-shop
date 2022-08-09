@@ -35,7 +35,7 @@ import product_11_image_02 from '../images/products/product-11 (2).jpg';
 import product_12_image_01 from '../images/products/product-12 (1).jpg';
 import product_12_image_02 from '../images/products/product-12 (2).jpg';
 
-interface IProduct {
+export interface IProduct {
     title: string;
     price: string;
     image01: any;

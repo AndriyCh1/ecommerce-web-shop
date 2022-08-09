@@ -2,6 +2,8 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import Button from './button';
 import numberWithCommas from '../utils/numberWithCommas';
+import { useDispatch } from 'react-redux';
+import { set } from '../redux/product-modal/product-modal-slice';
 
 interface IProps {
   img01: string;
@@ -12,6 +14,9 @@ interface IProps {
 }
 
 const ProductCard: React.FC<IProps> = ({ img01, img02, name, price, slug }) => {
+  const dispatch = useDispatch();
+
+
   return (
     <div className="product-card">
       <Link to={`/catalog/${slug}`}>
@@ -32,6 +37,7 @@ const ProductCard: React.FC<IProps> = ({ img01, img02, name, price, slug }) => {
           size="sm"
           icon="bx bx-cart"
           animate={true}
+          onClick={() => dispatch(set(slug))}
         >
           chon mua
         </Button>

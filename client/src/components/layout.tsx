@@ -4,6 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Header from './header';
 import Footer from './footer';
 import Routes from '../routes/routes';
+import ProductViewModal from './product-view-modal';
 
 const Layout = () => {
   return (
@@ -16,6 +17,7 @@ const Layout = () => {
           </div>
         </div>
         <Footer />
+        <ProductViewModal />
       </div>
     </BrowserRouter>
   );
