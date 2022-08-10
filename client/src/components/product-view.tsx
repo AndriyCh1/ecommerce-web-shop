@@ -1,25 +1,19 @@
 import React, { useEffect, useState } from 'react';
 import Button from './button';
-import numberWithCommas from '../utils/numberWithCommas';
 import { useNavigate } from 'react-router-dom';
 
-interface IProduct {
-  title: string;
-  price: string;
-  image01: any;
-  image02: any;
-  categorySlug: string;
-  colors: string[];
-  slug: string;
-  size: string[];
-  description: string;
-}
+import { IProduct } from '../assets/fake-data/products';
+import numberWithCommas from '../utils/numberWithCommas';
+import { useDispatch } from 'react-redux';
+import { addItem } from '../redux/shopping-cart/cart-item-slice';
 
 interface IProps {
   product: IProduct;
 }
 
 const ProductView: React.FC<IProps> = ({ product }) => {
+  const dispatch = useDispatch();
+
   const [previewImg, setPreviewImg] = useState(product.image01);
   const [descriptionExpand, setDescriptionExpand] = useState(false);
   const [color, setColor] = useState('');
@@ -60,12 +54,30 @@ const ProductView: React.FC<IProps> = ({ product }) => {
 
   const addToCart = () => {
     if (check()) {
-      console.log({ color, size, quantity });
+      dispatch(
+        addItem({
+          slug: product.slug,
+          color,
+          size,
+          quantity,
+          price: product.price,
+        }),
+      );
+      alert("success")
     }
   };
 
   const goToCart = () => {
     if (check()) {
+      dispatch(
+        addItem({
+          slug: product.slug,
+          color,
+          size,
+          quantity,
+          price: product.price,
+        }),
+      );
       navigate('/cart');
     }
   };
